@@ -1,4 +1,5 @@
 <?php
+session_start();
 $errorMessages = [];
 $formData = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,8 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo ('Данные успешно отправлены!');
         $formData = [];
         $errorMessages = [];
+        $_SESSION["errorMessages"] = [];
     }
     else{
-        require ('index.php');
+        $_SESSION["errorMessages"]=$errorMessages;
+        header('Location: index.php');
     }
 }
