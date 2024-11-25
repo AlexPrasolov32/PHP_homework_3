@@ -7,37 +7,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $formData['email'] = trim($_POST['email']);
     $formData['age'] = trim($_POST['age']);
     $formData['region'] = $_POST['region'];
-    if(isset($_POST['radio'])){
-        $formData['radio'] = $_POST['radio'];
-    }
-    else{
-        $formData['radio'] = null;
-    }
-    if(isset($_POST['checkbox'])){
-        $formData['checkbox'] = true;
-    }
-    else{
-        $formData['radio'] = false;
-    }
+    if(isset($_POST['radio'])){$formData['radio'] = $_POST['radio'];}
+    else{$formData['radio'] = null;}
+    if(isset($_POST['checkbox'])){$formData['checkbox'] = true;}
+    else{$formData['radio'] = false;}
     $formData['password'] = md5($_POST['password']);
-    if (empty($formData['name'])) {
-        $errorMessages[] = "Поле 'Имя' обязательно для заполнения.";
-    }
-    if (empty($formData['email'])) {
-        $errorMessages[] = "Поле 'Эмейл' обязательно для заполнения.";
-    }
-    if (empty($formData['age']) && $formData['age']>0) {
-        $errorMessages[] = "Поле 'Возраст' обязательно для заполнения.";
-    }
-    if (empty($formData['region'])) {
-        $errorMessages[] = "Поле 'Область' обязательно для выбора.";
-    }
-    if (empty($formData['radio'])) {
-        $errorMessages[] = "Выберите пол.";
-    }
-    if (empty($formData['checkbox'])) {
-        $errorMessages[] = "Поддтвердите данные.";
-    }
+    if (empty($formData['name'])) {$errorMessages[] = "Поле 'Имя' обязательно для заполнения.";}
+    if (empty($formData['email'])) {$errorMessages[] = "Поле 'Эл. Почта' обязательно для заполнения.";}
+    if (empty($formData['age']) && $formData['age']>0) {$errorMessages[] = "Поле 'Возраст' обязательно для заполнения.";}
+    if (empty($formData['region'])) {$errorMessages[] = "Поле 'Область' обязательно для выбора.";}
+    if (empty($formData['radio'])) {$errorMessages[] = "Выберите пол.";}
+    if (empty($formData['password'])) {$errorMessages[] = "Введите пароль.";}
+    if (empty($formData['checkbox'])) {$errorMessages[] = "Поддтвердите данные.";}
     if (empty($errorMessages)) {
         $logData = [
             'timestamp' => date('Y-m-d H:i:s'),
@@ -70,16 +51,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="block">
         <form method="post" action="">
             <label for="name">Введите имя:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" >
             <br>
             <label for="email">Введите Эл. почту:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" >
             <br>
             <label for="age">Введите фозраст:</label>
-            <input type="number" id="age" name="age" required>
+            <input type="number" id="age" name="age" >
             <br>
             <label for="region">Выберите регион:</label>
-            <select id="region" name="region" required>
+            <select id="region" name="region" >
                 <option value=""></option>
                 <?php foreach ($regions as $region): ?>
                     <option value="<?php echo htmlspecialchars($region); ?>"><?php echo htmlspecialchars($region); ?></option>
@@ -87,11 +68,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select>
             <br>
             <label>Выберите пол:</label>
-            <label><input type="radio" name="radio" value="Муж" required> Мужской</label>
+            <label><input type="radio" name="radio" value="Муж"> Мужской</label>
             <label><input type="radio" name="radio" value="Жен"> Женский</label>
             <br>
             <label for="password">Введите пароль:</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" >
             <br>
             <label><input type="checkbox" name="checkbox"> Данные верны</label>
             <br>
